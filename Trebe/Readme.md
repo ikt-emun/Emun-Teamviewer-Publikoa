@@ -49,3 +49,30 @@ Script honek Windows ekipoko erabiltzaile guztien mahaigaineko lasterbide baten 
        Write-Output "Ikonoa eguneratu da: $shortcutPath"
    }
    ```
+
+##    Oharrak
+
+###  .Lasterbidearen izena: Lasterbidearen izena "Trebe Itzuli.lnk" dela ziurtatu behar duzu erabiltzaile guztien mahaigainean, script honek izen hori bilatzen baitu.
+###  .Ikono-fitxategiaren kokapena: Script-ak C:\Ikonoak\ karpetan gordetzen du ikonoa; nahi izanez gero, karpeta hau aldatu dezakezu.
+
+## Erabilitako Komandoak
+
+    Invoke-WebRequest: URL batetik fitxategi bat deskargatzeko.
+    Test-Path: Fitxategi edo karpeta bat existitzen den egiaztatzeko.
+    Get-ChildItem: Erabiltzaileen direktorioak lortzeko.
+    New-Object -ComObject WScript.Shell: Lasterbide bat kudeatzeko.
+
+## Laguntza
+
+Arazoak badituzu edo laguntza behar baduzu, jarri harremanetan zure IT taldearekin edo kontsultatu GitHub proiektuaren Issues atala.
+
+Eskerrik asko script hau erabiltzeagatik!
+   ```markdown
+### Azalpena
+- **Helburu nagusiak**: Script-ak zer egiten duen, nola erabili eta zer pribilegio behar diren laburbiltzen ditu.
+- **Exekuzio argibideak**: PowerShell administratzaile moduan exekutatzeko urratsak zehazten dira.
+- **Ohar praktikoak**: Lasterbidearen izena eta karpeten kokapena azpimarratzen dira.
+
+README hau zure GitHub proiektuan txertatuz, beste erabiltzaileek erraz ulertu eta erabil dezakete script-a.
+   ```
+
