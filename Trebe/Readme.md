@@ -48,6 +48,6 @@ foreach ($erabiltzaile in $erabiltzaileak) {
     $shortcut.Save()
     Write-Output "Ikonoa eguneratu da: $shortcutPath"
 }
-   ```
+```
 
 
