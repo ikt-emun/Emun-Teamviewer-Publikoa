@@ -1,6 +1,6 @@
 # 1. Deskargatu ikonoa web lekutik eta gorde C:\Ikonoak\ ikono.ico modura
-$ikonoURL = "https://zure-webgunea.com/ikono.ico"
-$helmuga = "C:\Ikonoak\ikono.ico"
+$ikonoURL = "https://raw.githubusercontent.com/ikt-emun/Emun-Teamviewer-Publikoa/refs/heads/main/Trebe/trebe_2qZ_icon.ico"
+$helmuga = "C:\Ikonoak\trebe_2qZ_icon.ico"
 
 # Ziurtatu C:\Ikonoak karpeta existitzen dela, bestela sortu
 if (!(Test-Path -Path "C:\Ikonoak")) {
@@ -10,8 +10,13 @@ if (!(Test-Path -Path "C:\Ikonoak")) {
 # Deskargatu ikonoa
 Invoke-WebRequest -Uri $ikonoURL -OutFile $helmuga
 
-# 2. Sortu edo editatu mahaigaineko lasterbidea eta aldatu ikonoa
-$shortcutPath = "$env:USERPROFILE\Desktop\zure-lasterbidea.lnk" # Lasterbidearen kokapena
-$shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($shortcutPath)
-$shortcut.IconLocation = $helmuga
-$shortcut.Save()
+# 2. Erabiltzaile bakoitzaren mahaigainean lasterbidea eguneratu
+$erabiltzaileak = Get-ChildItem -Path "C:\Users" -Directory | Where-Object { Test-Path "$($_.FullName)\Desktop\Trebe Itzuli.lnk" }
+
+foreach ($erabiltzaile in $erabiltzaileak) {
+    $shortcutPath = "$($erabiltzaile.FullName)\Desktop\Trebe Itzuli.lnk"
+    $shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($shortcutPath)
+    $shortcut.IconLocation = $helmuga
+    $shortcut.Save()
+    Write-Output "Ikonoa eguneratu da: $shortcutPath"
+}
