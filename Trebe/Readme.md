@@ -48,3 +48,4 @@ Script honek Windows ekipoko erabiltzaile guztien mahaigaineko lasterbide baten 
        $shortcut.Save()
        Write-Output "Ikonoa eguneratu da: $shortcutPath"
    }
+   ```
