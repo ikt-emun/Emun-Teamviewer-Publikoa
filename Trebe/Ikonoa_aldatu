@@ -1,0 +1,17 @@
+# 1. Deskargatu ikonoa web lekutik eta gorde C:\Ikonoak\ ikono.ico modura
+$ikonoURL = "https://zure-webgunea.com/ikono.ico"
+$helmuga = "C:\Ikonoak\ikono.ico"
+
+# Ziurtatu C:\Ikonoak karpeta existitzen dela, bestela sortu
+if (!(Test-Path -Path "C:\Ikonoak")) {
+    New-Item -ItemType Directory -Path "C:\Ikonoak"
+}
+
+# Deskargatu ikonoa
+Invoke-WebRequest -Uri $ikonoURL -OutFile $helmuga
+
+# 2. Sortu edo editatu mahaigaineko lasterbidea eta aldatu ikonoa
+$shortcutPath = "$env:USERPROFILE\Desktop\zure-lasterbidea.lnk" # Lasterbidearen kokapena
+$shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($shortcutPath)
+$shortcut.IconLocation = $helmuga
+$shortcut.Save()
