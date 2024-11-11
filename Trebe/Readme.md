@@ -26,25 +26,28 @@ Script honek Windows ekipoko erabiltzaile guztien mahaigaineko lasterbide baten 
 1. Ireki PowerShell **administratzaile moduan**.
 2. Exekutatu script hau:
    ```powershell
-   # Ikonoa deskargatzeko URL eta helmuga
-   $ikonoURL = "https://raw.githubusercontent.com/Emun-Teamviewer-Publikoa/Trebe/adarkadura/trebe_2qZ_icon.ico"
-   $helmuga = "C:\Ikonoak\trebe_2qZ_icon.ico"
+   # 1. Deskargatu ikonoa web lekutik eta gorde C:\Ikonoak\ ikono.ico modura
+$ikonoURL = "https://raw.githubusercontent.com/ikt-emun/Emun-Teamviewer-Publikoa/refs/heads/main/Trebe/trebe_2qZ_icon.ico"
+$helmuga = "C:\Ikonoak\trebe_2qZ_icon.ico"
 
-   # Ziurtatu C:\Ikonoak karpeta existitzen dela; bestela, sortu
-   if (!(Test-Path -Path "C:\Ikonoak")) {
-       New-Item -ItemType Directory -Path "C:\Ikonoak"
-   }
+# Ziurtatu C:\Ikonoak karpeta existitzen dela, bestela sortu
+if (!(Test-Path -Path "C:\Ikonoak")) {
+    New-Item -ItemType Directory -Path "C:\Ikonoak"
+}
 
-   # Deskargatu ikonoa
-   Invoke-WebRequest -Uri $ikonoURL -OutFile $helmuga
+# Deskargatu ikonoa
+Invoke-WebRequest -Uri $ikonoURL -OutFile $helmuga
 
-   # Erabiltzaile bakoitzaren mahaigainean lasterbidea eguneratu
-   $erabiltzaileak = Get-ChildItem -Path "C:\Users" -Directory | Where-Object { Test-Path "$($_.FullName)\Desktop\Trebe Itzuli.lnk" }
+# 2. Erabiltzaile bakoitzaren mahaigainean lasterbidea eguneratu
+$erabiltzaileak = Get-ChildItem -Path "C:\Users" -Directory | Where-Object { Test-Path "$($_.FullName)\Desktop\Trebe Itzuli.lnk" }
 
-   foreach ($erabiltzaile in $erabiltzaileak) {
-       $shortcutPath = "$($erabiltzaile.FullName)\Desktop\Trebe Itzuli.lnk"
-       $shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($shortcutPath)
-       $shortcut.IconLocation = $helmuga
-       $shortcut.Save()
-       Write-Output "Ikonoa eguneratu da: $shortcutPath"
-   }
+foreach ($erabiltzaile in $erabiltzaileak) {
+    $shortcutPath = "$($erabiltzaile.FullName)\Desktop\Trebe Itzuli.lnk"
+    $shortcut = (New-Object -ComObject WScript.Shell).CreateShortcut($shortcutPath)
+    $shortcut.IconLocation = $helmuga
+    $shortcut.Save()
+    Write-Output "Ikonoa eguneratu da: $shortcutPath"
+}
+   ```
+
+
